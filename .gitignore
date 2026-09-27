@@ -1,0 +1,21 @@
+# Build outputs and native binaries.
+.build/
+*.exe
+*.dll
+*.lib
+*.a
+*.so
+*.so.*
+*.dylib
+*.obj
+*.o
+*.pdb
+*.rdi
+*.exp
+*.ilk
+*.pch
+/generated/
+
+# Keep only the SDK drop-in marker.
+/superliminal/*
+!/superliminal/COPY_API_HERE
