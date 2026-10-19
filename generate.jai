@@ -8,8 +8,8 @@
 
 AT_COMPILE_TIME     :: true; // Set false to build generate.exe
 RUN_TESTS           :: true;  // Build and run tests after generating the package
-OUTPUT_DIRECTORY    :: "generated/Superliminal";
-SOURCE_PATH         :: "superliminal";
+OUTPUT_DIRECTORY    :: "generated/Superluminal";
+SOURCE_PATH         :: "superluminal";
 LIB_BASE_NAME       :: "PerformanceAPI";
 LIB_IDENTIFIER      :: "performance_api";
 
@@ -46,7 +46,7 @@ LIB_IDENTIFIER      :: "performance_api";
 }
 
 generate_bindings :: () -> bool {
-    print("Generating Superliminal bindings for %/%...\n", OS, CPU);
+    print("Generating Superluminal bindings for %/%...\n", OS, CPU);
     platform_directory: string;
     lib_directory: string;
     sdk_lib_name: string;
@@ -91,7 +91,7 @@ generate_bindings :: () -> bool {
     options.generate_compile_time_struct_checks = false; // true for more verbose checks
     options.try_to_preserve_comments = true; // The visitor replaces SDK documentation with short section comments.
     options.mimic_spacing_flags = 0;
-    options.visitor_with_data = visit_superliminal_api;
+    options.visitor_with_data = visit_superluminal_api;
 
     array_add(*options.library_search_paths, lib_directory);
     array_add(*options.libraries, .{filename = sdk_lib_name, identifier = LIB_IDENTIFIER});
@@ -144,7 +144,7 @@ generate_bindings :: () -> bool {
     return true;
 }
 
-visit_superliminal_api :: (decl: *Declaration, parent: *Declaration, user_data: *void) -> Declaration_Visit_Result {
+visit_superluminal_api :: (decl: *Declaration, parent: *Declaration, user_data: *void) -> Declaration_Visit_Result {
     if !parent && (decl.name == "PERFORMANCEAPI_ENABLED" || (!begins_with(decl.name, "PerformanceAPI_") && !begins_with(decl.name, "PERFORMANCEAPI_"))) {
         decl.decl_flags |= .OMIT_FROM_OUTPUT;
         return .STOP;

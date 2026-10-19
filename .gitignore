@@ -17,5 +17,5 @@
 /generated/
 
 # Keep only the SDK drop-in marker.
-/superliminal/*
-!/superliminal/COPY_API_HERE
+/superluminal/*
+!/superluminal/COPY_API_HERE

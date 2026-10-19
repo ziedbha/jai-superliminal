@@ -1,12 +1,12 @@
-# Superliminal profiler bindings for Jai
+# Superluminal profiler bindings for Jai
 
-## Disclaimer: this work is not affiliated with Superliminal
+## Disclaimer: this work is not affiliated with Superluminal
 
 Jai bindings for the [Superluminal profiler](https://superluminal.eu/), currently only supporting Windows x64.
 
 ## Setup
 
-1. Copy the contents of your Superluminal installation's `API` folder into `superliminal/`. E.g. on Windows this is typically somewhere here `C:\Program Files\Superluminal\Performance\API`
+1. Copy the contents of your Superluminal installation's `API` folder into `superluminal/`. E.g. on Windows this is typically somewhere here `C:\Program Files\Superluminal\Performance\API`
 2. Run `jai generate.jai` from the repository root.
 
 ### Notes on building the bindings
@@ -18,10 +18,10 @@ Jai bindings for the [Superluminal profiler](https://superluminal.eu/), currentl
 ## Profiling run-time code
 
 ```jai
-Sliminal :: #import "Superliminal";
+Sluminal :: #import "Superluminal";
 
 update :: () {
-    Sliminal.scope("Update", color = Sliminal.COLOR_BLUE);
+    Sluminal.scope("Update", color = Sluminal.COLOR_BLUE);
 }
 ```
 

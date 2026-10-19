@@ -7,16 +7,16 @@ COLOR_PURPLE :: 0x800080ff;
 
 #if ENABLED {
     #if DLL {
-        #add_context superliminal_api: PerformanceAPI_Functions;
+        #add_context superluminal_api: PerformanceAPI_Functions;
 
         // Make sure to call this once after loading in the library yourself for every thread that needs profiling.
-        // It will setup the context's `superliminal_api` to point to the API table so that you may just call
+        // It will setup the context's `superluminal_api` to point to the API table so that you may just call
         // `begin` and `end` without passing around the table yourself.
         init :: (get_api: GetAPI_Func) -> bool {
             if !get_api return false;
             api: PerformanceAPI_Functions;
             if get_api(VERSION, *api) == 0 return false;
-            context.superliminal_api = api;
+            context.superluminal_api = api;
             return true;
         }
     }
@@ -24,8 +24,8 @@ COLOR_PURPLE :: 0x800080ff;
     begin :: inline (name: string, data: string = "", color: u32 = DEFAULT_COLOR) {
         assert(name.count <= 0xffff && data.count <= 0xffff, "Performance API strings must fit in u16");
         #if DLL {
-            assert(context.superliminal_api.BeginEventN != null, "Initialize the Superliminal API in this context before profiling");
-            context.superliminal_api.BeginEventN(name.data, cast(u16) name.count, data.data, cast(u16) data.count, color);
+            assert(context.superluminal_api.BeginEventN != null, "Initialize the Superluminal API in this context before profiling");
+            context.superluminal_api.BeginEventN(name.data, cast(u16) name.count, data.data, cast(u16) data.count, color);
         } else {
             BeginEvent_N(name.data, cast(u16) name.count, data.data, cast(u16) data.count, color);
         }
@@ -33,7 +33,7 @@ COLOR_PURPLE :: 0x800080ff;
 
     end :: inline () {
         #if DLL {
-            context.superliminal_api.EndEvent();
+            context.superluminal_api.EndEvent();
         } else {
             EndEvent();
         }
@@ -47,7 +47,7 @@ COLOR_PURPLE :: 0x800080ff;
     set_thread_name :: inline (name: string) {
         assert(name.count <= 0xffff, "Performance API thread names must fit in u16");
         #if DLL {
-            context.superliminal_api.SetCurrentThreadNameN(name.data, cast(u16) name.count);
+            context.superluminal_api.SetCurrentThreadNameN(name.data, cast(u16) name.count);
         } else {
             SetCurrentThreadName_N(name.data, cast(u16) name.count);
         }
@@ -55,7 +55,7 @@ COLOR_PURPLE :: 0x800080ff;
 
     register_fiber :: inline (id: u64) {
         #if DLL {
-            context.superliminal_api.RegisterFiber(id);
+            context.superluminal_api.RegisterFiber(id);
         } else {
             RegisterFiber(id);
         }
@@ -63,7 +63,7 @@ COLOR_PURPLE :: 0x800080ff;
 
     unregister_fiber :: inline (id: u64) {
         #if DLL {
-            context.superliminal_api.UnregisterFiber(id);
+            context.superluminal_api.UnregisterFiber(id);
         } else {
             UnregisterFiber(id);
         }
@@ -71,7 +71,7 @@ COLOR_PURPLE :: 0x800080ff;
 
     begin_fiber_switch :: inline (current_id: u64, new_id: u64) {
         #if DLL {
-            context.superliminal_api.BeginFiberSwitch(current_id, new_id);
+            context.superluminal_api.BeginFiberSwitch(current_id, new_id);
         } else {
             BeginFiberSwitch(current_id, new_id);
         }
@@ -79,7 +79,7 @@ COLOR_PURPLE :: 0x800080ff;
 
     end_fiber_switch :: inline (id: u64) {
         #if DLL {
-            context.superliminal_api.EndFiberSwitch(id);
+            context.superluminal_api.EndFiberSwitch(id);
         } else {
             EndFiberSwitch(id);
         }
